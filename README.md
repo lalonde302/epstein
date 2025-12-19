@@ -5,6 +5,7 @@ This repo contains a small CLI to:
 - Download **all PDF links** from one (or more) `justice.gov` pages into `data/pdfs/`
 - Extract text (and optionally **OCR** scanned PDFs) into `data/text/`
 - Embed + index into a local vector DB (`data/chroma/`) for **semantic search**
+- (WIP) A web UI (Azure Static Web Apps) in `frontend/` that will eventually expose semantic search
 
 ### Quickstart
 
@@ -62,4 +63,23 @@ python -m epstein query --q "flight logs to palm beach" --k 8
 
 - This tool only downloads **PDF links present on the page(s)** you pass. If DOJ adds pagination or additional index pages, pass each page URL.
 - The embedding model defaults to a small local model (`sentence-transformers/all-MiniLM-L6-v2`) to avoid API keys.
+
+### Web app (Azure Static Web Apps)
+
+- **frontend**: `frontend/` (Vite + React + TypeScript)
+- **api**: `api/` (Azure Functions stub with `GET /api/search`)
+
+To run locally (after installing Node deps):
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+SWA will be configured to:
+
+- **App location**: `frontend`
+- **Api location**: `api`
+- **Output location**: `frontend/dist`
 
